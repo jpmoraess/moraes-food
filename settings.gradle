@@ -1,4 +1,5 @@
 rootProject.name = 'moraes-food'
 include 'commons'
 include 'order-service'
+include 'infra'
 
