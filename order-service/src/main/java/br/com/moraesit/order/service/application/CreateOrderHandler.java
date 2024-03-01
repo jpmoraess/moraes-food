@@ -45,7 +45,7 @@ public class CreateOrderHandler {
         OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant);
         Order saved = save(order);
         logger.info("Order is created with id: {}", saved.getId().getValue());
-        return OrderDataMapper.orderToCreateOrderOutput(saved);
+        return OrderDataMapper.orderToCreateOrderOutput(saved, "Order created successfully!");
     }
 
     private Order save(Order order) {

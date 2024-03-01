@@ -24,6 +24,12 @@ public class CreateOrderOutput {
         this.orderStatus = orderStatus;
     }
 
+    public CreateOrderOutput(UUID orderTrackingId, OrderStatus orderStatus, String message) {
+        this.orderTrackingId = orderTrackingId;
+        this.orderStatus = orderStatus;
+        this.message = message;
+    }
+
     public UUID getOrderTrackingId() {
         return orderTrackingId;
     }

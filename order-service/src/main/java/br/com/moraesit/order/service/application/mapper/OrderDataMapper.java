@@ -37,8 +37,8 @@ public class OrderDataMapper {
                 .build();
     }
 
-    public static CreateOrderOutput orderToCreateOrderOutput(Order order) {
-        return new CreateOrderOutput(order.getTrackingId().getValue(), order.getOrderStatus());
+    public static CreateOrderOutput orderToCreateOrderOutput(Order order, String message) {
+        return new CreateOrderOutput(order.getTrackingId().getValue(), order.getOrderStatus(), message);
     }
 
     private static List<Product> orderItemInputListToProductList(List<OrderItemInput> orderItemInputList) {
