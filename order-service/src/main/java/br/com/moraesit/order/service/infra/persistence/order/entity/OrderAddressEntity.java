@@ -1,22 +1,39 @@
-package br.com.moraesit.order.service.domain.valueobject;
+package br.com.moraesit.order.service.infra.persistence.order.entity;
+
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
-public class StreetAddress {
-    private final UUID id;
-    private final String street;
-    private final String postalCode;
-    private final String city;
+@Entity
+@Table(name = "order_address")
+public class OrderAddressEntity {
 
-    public StreetAddress(UUID id, String street, String postalCode, String city) {
+    @Id
+    private UUID id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ORDER_ID")
+    private OrderEntity order;
+
+    private String street;
+    private String postalCode;
+    private String city;
+
+
+    public OrderAddressEntity() {
+    }
+
+    public OrderAddressEntity(UUID id, OrderEntity order, String street, String postalCode, String city) {
         this.id = id;
+        this.order = order;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
     }
 
-    private StreetAddress(Builder builder) {
+    private OrderAddressEntity(Builder builder) {
         id = builder.id;
+        order = builder.order;
         street = builder.street;
         postalCode = builder.postalCode;
         city = builder.city;
@@ -28,6 +45,10 @@ public class StreetAddress {
 
     public UUID getId() {
         return id;
+    }
+
+    public OrderEntity getOrder() {
+        return order;
     }
 
     public String getStreet() {
@@ -42,28 +63,28 @@ public class StreetAddress {
         return city;
     }
 
+    public void setOrder(OrderEntity order) {
+        this.order = order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StreetAddress that = (StreetAddress) o;
+        OrderAddressEntity that = (OrderAddressEntity) o;
 
-        if (!street.equals(that.street)) return false;
-        if (!postalCode.equals(that.postalCode)) return false;
-        return city.equals(that.city);
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        int result = street.hashCode();
-        result = 31 * result + postalCode.hashCode();
-        result = 31 * result + city.hashCode();
-        return result;
+        return id.hashCode();
     }
 
     public static final class Builder {
         private UUID id;
+        private OrderEntity order;
         private String street;
         private String postalCode;
         private String city;
@@ -73,6 +94,11 @@ public class StreetAddress {
 
         public Builder id(UUID val) {
             id = val;
+            return this;
+        }
+
+        public Builder order(OrderEntity val) {
+            order = val;
             return this;
         }
 
@@ -91,8 +117,8 @@ public class StreetAddress {
             return this;
         }
 
-        public StreetAddress build() {
-            return new StreetAddress(this);
+        public OrderAddressEntity build() {
+            return new OrderAddressEntity(this);
         }
     }
 }
