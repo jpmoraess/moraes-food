@@ -1,6 +1,7 @@
 {
+  "namespace": "br.com.moraesit.commons.kafka.model.avro",
   "type": "record",
-  "name": "PaymentRequestAvroModel",
+  "name": "PaymentResponseAvroModel",
   "fields": [
     {
       "name": "id",
@@ -11,6 +12,13 @@
     },
     {
       "name": "sagaId",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "paymentId",
       "type": {
         "type": "string",
         "logicalType": "uuid"
@@ -47,14 +55,24 @@
       }
     },
     {
-      "name": "paymentOrderStatus",
+      "name": "paymentStatus",
       "type": {
         "type": "enum",
-        "name": "PaymentOrderStatus",
+        "name": "PaymentStatus",
         "symbols": [
-          "PENDING",
-          "CANCELLED"
+          "COMPLETED",
+          "CANCELLED",
+          "FAILED"
         ]
+      }
+    },
+    {
+      "name": "failureMessages",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
       }
     }
   ]

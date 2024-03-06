@@ -8,6 +8,7 @@ import br.com.moraesit.order.service.application.dto.create.CreateOrderInput;
 import br.com.moraesit.order.service.application.dto.create.CreateOrderOutput;
 import br.com.moraesit.order.service.application.dto.create.OrderAddressInput;
 import br.com.moraesit.order.service.application.dto.create.OrderItemInput;
+import br.com.moraesit.order.service.application.dto.track.TrackOrderOutput;
 import br.com.moraesit.order.service.domain.entity.Order;
 import br.com.moraesit.order.service.domain.entity.OrderItem;
 import br.com.moraesit.order.service.domain.entity.Product;
@@ -39,6 +40,14 @@ public class OrderDataMapper {
 
     public static CreateOrderOutput orderToCreateOrderOutput(Order order, String message) {
         return new CreateOrderOutput(order.getTrackingId().getValue(), order.getOrderStatus(), message);
+    }
+
+    public static TrackOrderOutput orderToTrackOrderOutput(Order order) {
+        return TrackOrderOutput.builder()
+                .orderTrackingId(order.getTrackingId().getValue())
+                .orderStatus(order.getOrderStatus())
+                .failureMessages(order.getFailureMessages())
+                .build();
     }
 
     private static List<Product> orderItemInputListToProductList(List<OrderItemInput> orderItemInputList) {

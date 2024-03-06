@@ -24,6 +24,11 @@ import java.util.UUID;
 public class CreateOrderHandler {
     private final Logger logger = LoggerFactory.getLogger(CreateOrderHandler.class);
 
+    private final OrderDomainService orderDomainService;
+    private final OrderRepository orderRepository;
+    private final CustomerRepository customerRepository;
+    private final RestaurantRepository restaurantRepository;
+
     public CreateOrderHandler(OrderDomainService orderDomainService, OrderRepository orderRepository,
                               CustomerRepository customerRepository, RestaurantRepository restaurantRepository) {
         this.orderDomainService = orderDomainService;
@@ -31,11 +36,6 @@ public class CreateOrderHandler {
         this.customerRepository = customerRepository;
         this.restaurantRepository = restaurantRepository;
     }
-
-    private final OrderDomainService orderDomainService;
-    private final OrderRepository orderRepository;
-    private final CustomerRepository customerRepository;
-    private final RestaurantRepository restaurantRepository;
 
     @Transactional
     public CreateOrderOutput createOrder(CreateOrderInput input) {
