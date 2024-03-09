@@ -17,8 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static br.com.moraesit.commons.domain.DomainConstants.UTC;
+
 public class OrderDomainServiceImpl implements OrderDomainService {
-    private static final String UTC = "UTC";
+
     private final Logger logger = LoggerFactory.getLogger(OrderDomainServiceImpl.class);
 
     @Override
