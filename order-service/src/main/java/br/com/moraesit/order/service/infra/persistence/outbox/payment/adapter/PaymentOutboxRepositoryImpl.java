@@ -43,7 +43,7 @@ public class PaymentOutboxRepositoryImpl implements PaymentOutboxRepository {
 
     @Override
     public Optional<OrderPaymentOutboxMessage> findByTypeAndSagaIdAndSagaStatus(String type, UUID sagaId, SagaStatus... sagaStatuses) {
-        return paymentOutboxJpaRepository.findByTypeAndSagaIdAndStatusIn(type, sagaId, Arrays.asList(sagaStatuses))
+        return paymentOutboxJpaRepository.findByTypeAndSagaIdAndSagaStatusIn(type, sagaId, Arrays.asList(sagaStatuses))
                 .map(PaymentOutboxPersistenceMapper::paymentOutboxEntityToOrderPaymentOutboxMessage);
     }
 

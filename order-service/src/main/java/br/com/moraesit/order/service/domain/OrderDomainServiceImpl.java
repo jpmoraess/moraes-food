@@ -10,6 +10,7 @@ import br.com.moraesit.order.service.domain.event.OrderPaidEvent;
 import br.com.moraesit.order.service.domain.exception.OrderDomainException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 import static br.com.moraesit.commons.domain.DomainConstants.UTC;
 
+@Component // tirar daqui
 public class OrderDomainServiceImpl implements OrderDomainService {
 
     private final Logger logger = LoggerFactory.getLogger(OrderDomainServiceImpl.class);

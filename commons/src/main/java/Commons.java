@@ -1,6 +1,4 @@
-package br.com.moraesit.commons;
-
-public class Main {
+public class Commons {
     public static void main(String[] args) {
 
     }

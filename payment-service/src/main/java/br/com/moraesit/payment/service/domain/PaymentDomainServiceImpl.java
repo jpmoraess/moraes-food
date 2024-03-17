@@ -13,6 +13,8 @@ import br.com.moraesit.payment.service.domain.valueobject.CreditHistoryId;
 import br.com.moraesit.payment.service.domain.valueobject.TransactionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -21,6 +23,7 @@ import java.util.UUID;
 
 import static br.com.moraesit.commons.domain.DomainConstants.UTC;
 
+@Service // Tirar Daqui
 public class PaymentDomainServiceImpl implements PaymentDomainService {
 
     private final Logger logger = LoggerFactory.getLogger(PaymentDomainServiceImpl.class);

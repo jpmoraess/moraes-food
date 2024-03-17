@@ -7,12 +7,12 @@ spring:
   jpa:
     open-in-view: false
     show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    #database-platform: org.hibernate.dialect.PostgreSQL15Dialect
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        #dialect: org.hibernate.dialect.PostgreSQL15Dialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    url: jdbc:postgresql://localhost:5433/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -20,7 +20,7 @@ spring:
   sql:
     init:
       mode: ALWAYS
-      schema-location: classpath:init-schema.sql
+      schema-locations: classpath:init-schema.sql
 
 order-service:
   payment-request-topic-name: debezium.order.payment_outbox

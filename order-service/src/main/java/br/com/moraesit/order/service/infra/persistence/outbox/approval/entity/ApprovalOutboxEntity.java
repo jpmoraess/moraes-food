@@ -28,6 +28,9 @@ public class ApprovalOutboxEntity {
     @Version
     private int version;
 
+    public ApprovalOutboxEntity() {
+    }
+
     private ApprovalOutboxEntity(Builder builder) {
         id = builder.id;
         sagaId = builder.sagaId;

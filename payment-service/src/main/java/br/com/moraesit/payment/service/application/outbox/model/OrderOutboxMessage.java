@@ -1,52 +1,41 @@
-package br.com.moraesit.order.service.infra.persistence.outbox.payment.entity;
+package br.com.moraesit.payment.service.application.outbox.model;
 
-import br.com.moraesit.commons.domain.valueobject.OrderStatus;
+import br.com.moraesit.commons.domain.valueobject.PaymentStatus;
 import br.com.moraesit.commons.outbox.OutboxStatus;
-import br.com.moraesit.commons.saga.SagaStatus;
-import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-@Entity
-@Table(name = "payment_outbox")
-public class PaymentOutboxEntity {
-
-    @Id
+public class OrderOutboxMessage {
     private UUID id;
     private UUID sagaId;
     private ZonedDateTime createdAt;
     private ZonedDateTime processedAt;
     private String type;
     private String payload;
-    @Enumerated(EnumType.STRING)
-    private SagaStatus sagaStatus;
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
-    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
     private OutboxStatus outboxStatus;
-    @Version
     private int version;
 
-    public PaymentOutboxEntity() {
+    public OrderOutboxMessage() {
     }
 
-    private PaymentOutboxEntity(Builder builder) {
+    private OrderOutboxMessage(Builder builder) {
         id = builder.id;
         sagaId = builder.sagaId;
         createdAt = builder.createdAt;
         processedAt = builder.processedAt;
         type = builder.type;
         payload = builder.payload;
-        sagaStatus = builder.sagaStatus;
-        orderStatus = builder.orderStatus;
-        outboxStatus = builder.outboxStatus;
+        paymentStatus = builder.paymentStatus;
+        setOutboxStatus(builder.outboxStatus);
         version = builder.version;
     }
 
     public static Builder builder() {
         return new Builder();
     }
+
 
     public UUID getId() {
         return id;
@@ -72,12 +61,8 @@ public class PaymentOutboxEntity {
         return payload;
     }
 
-    public SagaStatus getSagaStatus() {
-        return sagaStatus;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
     }
 
     public OutboxStatus getOutboxStatus() {
@@ -88,6 +73,10 @@ public class PaymentOutboxEntity {
         return version;
     }
 
+    public void setOutboxStatus(OutboxStatus outboxStatus) {
+        this.outboxStatus = outboxStatus;
+    }
+
     public static final class Builder {
         private UUID id;
         private UUID sagaId;
@@ -95,8 +84,7 @@ public class PaymentOutboxEntity {
         private ZonedDateTime processedAt;
         private String type;
         private String payload;
-        private SagaStatus sagaStatus;
-        private OrderStatus orderStatus;
+        private PaymentStatus paymentStatus;
         private OutboxStatus outboxStatus;
         private int version;
 
@@ -133,13 +121,8 @@ public class PaymentOutboxEntity {
             return this;
         }
 
-        public Builder sagaStatus(SagaStatus val) {
-            sagaStatus = val;
-            return this;
-        }
-
-        public Builder orderStatus(OrderStatus val) {
-            orderStatus = val;
+        public Builder paymentStatus(PaymentStatus val) {
+            paymentStatus = val;
             return this;
         }
 
@@ -153,8 +136,8 @@ public class PaymentOutboxEntity {
             return this;
         }
 
-        public PaymentOutboxEntity build() {
-            return new PaymentOutboxEntity(this);
+        public OrderOutboxMessage build() {
+            return new OrderOutboxMessage(this);
         }
     }
 }

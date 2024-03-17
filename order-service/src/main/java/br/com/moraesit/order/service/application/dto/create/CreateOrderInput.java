@@ -15,8 +15,10 @@ import java.util.UUID;
 public class CreateOrderInput {
     @NotNull
     private UUID customerId;
+
     @NotNull
     private UUID restaurantId;
+
     @NotNull
     private BigDecimal price;
     @NotNull

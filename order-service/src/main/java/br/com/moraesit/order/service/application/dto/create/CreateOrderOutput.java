@@ -8,14 +8,13 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-@Getter
-@Builder
-@AllArgsConstructor
 public class CreateOrderOutput {
     @NotNull
     private UUID orderTrackingId;
+
     @NotNull
     private OrderStatus orderStatus;
+
     @NotNull
     private String message;
 

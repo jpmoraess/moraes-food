@@ -15,7 +15,7 @@ public interface PaymentOutboxJpaRepository extends JpaRepository<PaymentOutboxE
 
     Optional<List<PaymentOutboxEntity>> findByTypeAndOutboxStatusAndSagaStatusIn(String type, OutboxStatus outboxStatus, List<SagaStatus> sagaStatus);
 
-    Optional<PaymentOutboxEntity> findByTypeAndSagaIdAndStatusIn(String type, UUID sagaId, List<SagaStatus> sagaStatus);
+    Optional<PaymentOutboxEntity> findByTypeAndSagaIdAndSagaStatusIn(String type, UUID sagaId, List<SagaStatus> sagaStatus);
 
     void deleteByTypeAndOutboxStatusAndSagaStatusIn(String type, OutboxStatus outboxStatus, List<SagaStatus> sagaStatus);
 }
