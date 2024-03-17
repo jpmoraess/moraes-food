@@ -1,9 +1,9 @@
 package br.com.moraesit.order.service.application.mapper;
 
-import br.com.moraesit.commons.domain.valueobject.CustomerId;
-import br.com.moraesit.commons.domain.valueobject.Money;
-import br.com.moraesit.commons.domain.valueobject.ProductId;
-import br.com.moraesit.commons.domain.valueobject.RestaurantId;
+import br.com.moraesit.commons.domain.events.payload.OrderApprovalEventPayload;
+import br.com.moraesit.commons.domain.events.payload.OrderApprovalEventProduct;
+import br.com.moraesit.commons.domain.events.payload.OrderPaymentEventPayload;
+import br.com.moraesit.commons.domain.valueobject.*;
 import br.com.moraesit.order.service.application.dto.create.CreateOrderInput;
 import br.com.moraesit.order.service.application.dto.create.CreateOrderOutput;
 import br.com.moraesit.order.service.application.dto.create.OrderAddressInput;
@@ -13,6 +13,8 @@ import br.com.moraesit.order.service.domain.entity.Order;
 import br.com.moraesit.order.service.domain.entity.OrderItem;
 import br.com.moraesit.order.service.domain.entity.Product;
 import br.com.moraesit.order.service.domain.entity.Restaurant;
+import br.com.moraesit.order.service.domain.event.OrderCreatedEvent;
+import br.com.moraesit.order.service.domain.event.OrderPaidEvent;
 import br.com.moraesit.order.service.domain.valueobject.StreetAddress;
 
 import java.util.List;
@@ -47,6 +49,32 @@ public class OrderDataMapper {
                 .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
                 .failureMessages(order.getFailureMessages())
+                .build();
+    }
+
+    public static OrderPaymentEventPayload orderCreatedEventToOrderPaymentEventPayload(OrderCreatedEvent orderCreatedEvent) {
+        return OrderPaymentEventPayload.builder()
+                .customerId(orderCreatedEvent.getOrder().getCustomerId().getValue().toString())
+                .orderId(orderCreatedEvent.getOrder().getId().getValue().toString())
+                .price(orderCreatedEvent.getOrder().getPrice().getAmount())
+                .createdAt(orderCreatedEvent.getCreatedAt())
+                .paymentOrderStatus(PaymentOrderStatus.PENDING.name())
+                .build();
+    }
+
+    public static OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
+        return OrderApprovalEventPayload.builder()
+                .orderId(orderPaidEvent.getOrder().getId().getValue().toString())
+                .restaurantId(orderPaidEvent.getOrder().getRestaurantId().getValue().toString())
+                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
+                .products(orderPaidEvent.getOrder().getItems().stream()
+                        .map(orderItem -> OrderApprovalEventProduct.builder()
+                                .id(orderItem.getProduct().getId().getValue().toString())
+                                .quantity(orderItem.getQuantity())
+                                .build())
+                        .collect(Collectors.toList()))
+                .price(orderPaidEvent.getOrder().getPrice().getAmount())
+                .createdAt(orderPaidEvent.getCreatedAt())
                 .build();
     }
 

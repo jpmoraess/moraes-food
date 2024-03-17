@@ -1,5 +1,6 @@
 package br.com.moraesit.order.service.infra.persistence.order.adapter;
 
+import br.com.moraesit.commons.domain.valueobject.OrderId;
 import br.com.moraesit.order.service.application.ports.output.repository.OrderRepository;
 import br.com.moraesit.order.service.domain.entity.Order;
 import br.com.moraesit.order.service.domain.valueobject.TrackingId;
@@ -22,6 +23,12 @@ public class OrderRepositoryImpl implements OrderRepository {
     public Order save(Order order) {
         return OrderPersistenceMapper.orderEntityToOrder(orderJpaRepository
                 .save(OrderPersistenceMapper.orderToOrderEntity(order)));
+    }
+
+    @Override
+    public Optional<Order> findById(OrderId orderId) {
+        return orderJpaRepository.findById(orderId.getValue())
+                .map(OrderPersistenceMapper::orderEntityToOrder);
     }
 
     @Override

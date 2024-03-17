@@ -1,41 +1,44 @@
-package br.com.moraesit.order.service.application.dto.message;
+package br.com.moraesit.commons.domain.events.payload;
 
-import br.com.moraesit.commons.domain.valueobject.PaymentStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.List;
+import java.time.ZonedDateTime;
 
-@Getter
-@Builder
-@AllArgsConstructor
-public class PaymentResponse {
+public class OrderPaymentEventPayload {
+
+    @JsonProperty
     private String id;
-    private String sagaId;
-    private String orderId;
-    private String paymentId;
-    private String customerId;
-    private BigDecimal price;
-    private Instant createdAt;
-    private PaymentStatus paymentStatus;
-    private List<String> failureMessages;
 
-    public PaymentResponse() {
+    @JsonProperty
+    private String sagaId;
+
+    @JsonProperty
+    private String orderId;
+
+    @JsonProperty
+    private String customerId;
+
+    @JsonProperty
+    private BigDecimal price;
+
+    @JsonProperty
+    private ZonedDateTime createdAt;
+
+    @JsonProperty
+    private String paymentOrderStatus;
+
+    public OrderPaymentEventPayload() {
     }
 
-    private PaymentResponse(Builder builder) {
+    private OrderPaymentEventPayload(Builder builder) {
         id = builder.id;
         sagaId = builder.sagaId;
         orderId = builder.orderId;
-        paymentId = builder.paymentId;
         customerId = builder.customerId;
         price = builder.price;
         createdAt = builder.createdAt;
-        paymentStatus = builder.paymentStatus;
-        failureMessages = builder.failureMessages;
+        paymentOrderStatus = builder.paymentOrderStatus;
     }
 
     public static Builder builder() {
@@ -54,10 +57,6 @@ public class PaymentResponse {
         return orderId;
     }
 
-    public String getPaymentId() {
-        return paymentId;
-    }
-
     public String getCustomerId() {
         return customerId;
     }
@@ -66,28 +65,22 @@ public class PaymentResponse {
         return price;
     }
 
-    public Instant getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public List<String> getFailureMessages() {
-        return failureMessages;
+    public String getPaymentOrderStatus() {
+        return paymentOrderStatus;
     }
 
     public static final class Builder {
         private String id;
         private String sagaId;
         private String orderId;
-        private String paymentId;
         private String customerId;
         private BigDecimal price;
-        private Instant createdAt;
-        private PaymentStatus paymentStatus;
-        private List<String> failureMessages;
+        private ZonedDateTime createdAt;
+        private String paymentOrderStatus;
 
         private Builder() {
         }
@@ -107,11 +100,6 @@ public class PaymentResponse {
             return this;
         }
 
-        public Builder paymentId(String val) {
-            paymentId = val;
-            return this;
-        }
-
         public Builder customerId(String val) {
             customerId = val;
             return this;
@@ -122,23 +110,18 @@ public class PaymentResponse {
             return this;
         }
 
-        public Builder createdAt(Instant val) {
+        public Builder createdAt(ZonedDateTime val) {
             createdAt = val;
             return this;
         }
 
-        public Builder paymentStatus(PaymentStatus val) {
-            paymentStatus = val;
+        public Builder paymentOrderStatus(String val) {
+            paymentOrderStatus = val;
             return this;
         }
 
-        public Builder failureMessages(List<String> val) {
-            failureMessages = val;
-            return this;
-        }
-
-        public PaymentResponse build() {
-            return new PaymentResponse(this);
+        public OrderPaymentEventPayload build() {
+            return new OrderPaymentEventPayload(this);
         }
     }
 }
