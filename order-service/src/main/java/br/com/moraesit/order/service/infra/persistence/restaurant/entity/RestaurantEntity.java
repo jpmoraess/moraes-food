@@ -4,13 +4,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @IdClass(RestaurantEntityId.class)
 @Table(name = "order_restaurant_m_view", schema = "restaurant")
+@Entity
 public class RestaurantEntity {
 
     @Id
@@ -22,41 +28,6 @@ public class RestaurantEntity {
     private String productName;
     private BigDecimal productPrice;
 
-    public RestaurantEntity() {
-    }
-
-    public RestaurantEntity(UUID restaurantId, UUID productId, String restaurantName, Boolean restaurantActive, String productName, BigDecimal productPrice) {
-        this.restaurantId = restaurantId;
-        this.productId = productId;
-        this.restaurantName = restaurantName;
-        this.restaurantActive = restaurantActive;
-        this.productName = productName;
-        this.productPrice = productPrice;
-    }
-
-    public UUID getRestaurantId() {
-        return restaurantId;
-    }
-
-    public UUID getProductId() {
-        return productId;
-    }
-
-    public String getRestaurantName() {
-        return restaurantName;
-    }
-
-    public Boolean getRestaurantActive() {
-        return restaurantActive;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public BigDecimal getProductPrice() {
-        return productPrice;
-    }
 
     @Override
     public boolean equals(Object o) {

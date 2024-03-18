@@ -13,6 +13,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CreateOrderInput {
+
     @NotNull
     private UUID customerId;
 
@@ -21,28 +22,10 @@ public class CreateOrderInput {
 
     @NotNull
     private BigDecimal price;
+
     @NotNull
     private List<OrderItemInput> items;
+
     @NotNull
     private OrderAddressInput orderAddress;
-
-    public UUID getCustomerId() {
-        return customerId;
-    }
-
-    public UUID getRestaurantId() {
-        return restaurantId;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public List<OrderItemInput> getItems() {
-        return items;
-    }
-
-    public OrderAddressInput getOrderAddress() {
-        return orderAddress;
-    }
 }

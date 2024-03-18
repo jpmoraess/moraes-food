@@ -8,6 +8,10 @@ plugins {
 group = 'br.com.moraesit'
 version = '0.0.1-SNAPSHOT'
 
+java {
+    sourceCompatibility = '17'
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor

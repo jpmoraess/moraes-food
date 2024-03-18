@@ -1,27 +1,18 @@
 package br.com.moraesit.order.service.infra.persistence.order.entity;
 
+import lombok.*;
+
 import java.io.Serializable;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItemEntityId implements Serializable {
 
     private Long id;
     private OrderEntity order;
-
-    public OrderItemEntityId() {
-    }
-
-    public OrderItemEntityId(Long id, OrderEntity order) {
-        this.id = id;
-        this.order = order;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public OrderEntity getOrder() {
-        return order;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -12,28 +12,16 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class OrderItemInput {
+
     @NotNull
     private UUID productId;
+
     @NotNull
     private Integer quantity;
+
     @NotNull
     private BigDecimal price;
+
     @NotNull
     private BigDecimal subTotal;
-
-    public UUID getProductId() {
-        return productId;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public BigDecimal getSubTotal() {
-        return subTotal;
-    }
 }

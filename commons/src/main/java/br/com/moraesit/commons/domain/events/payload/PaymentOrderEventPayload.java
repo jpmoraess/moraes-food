@@ -1,4 +1,4 @@
-package br.com.moraesit.payment.service.application.outbox.model;
+package br.com.moraesit.commons.domain.events.payload;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class OrderEventPayload {
+public class PaymentOrderEventPayload {
 
     @JsonProperty
     private String paymentId;

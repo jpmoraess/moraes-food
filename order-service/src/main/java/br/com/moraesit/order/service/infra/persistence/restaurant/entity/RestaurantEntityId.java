@@ -1,28 +1,21 @@
 package br.com.moraesit.order.service.infra.persistence.restaurant.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.UUID;
 
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestaurantEntityId implements Serializable {
 
     private UUID restaurantId;
     private UUID productId;
-
-    public RestaurantEntityId() {
-    }
-
-    public RestaurantEntityId(UUID restaurantId, UUID productId) {
-        this.restaurantId = restaurantId;
-        this.productId = productId;
-    }
-
-    public UUID getRestaurantId() {
-        return restaurantId;
-    }
-
-    public UUID getProductId() {
-        return productId;
-    }
 
     @Override
     public boolean equals(Object o) {
