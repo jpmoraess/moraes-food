@@ -27,5 +27,5 @@ public class CreateOrderInput {
     private List<OrderItemInput> items;
 
     @NotNull
-    private OrderAddressInput orderAddress;
+    private OrderAddressInput address;
 }

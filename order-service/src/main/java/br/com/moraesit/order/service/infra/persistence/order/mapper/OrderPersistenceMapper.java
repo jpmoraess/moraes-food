@@ -1,9 +1,6 @@
 package br.com.moraesit.order.service.infra.persistence.order.mapper;
 
-import br.com.moraesit.commons.domain.valueobject.CustomerId;
-import br.com.moraesit.commons.domain.valueobject.Money;
-import br.com.moraesit.commons.domain.valueobject.ProductId;
-import br.com.moraesit.commons.domain.valueobject.RestaurantId;
+import br.com.moraesit.commons.domain.valueobject.*;
 import br.com.moraesit.order.service.domain.entity.Order;
 import br.com.moraesit.order.service.domain.entity.OrderItem;
 import br.com.moraesit.order.service.domain.entity.Product;
@@ -13,6 +10,7 @@ import br.com.moraesit.order.service.domain.valueobject.TrackingId;
 import br.com.moraesit.order.service.infra.persistence.order.entity.OrderAddressEntity;
 import br.com.moraesit.order.service.infra.persistence.order.entity.OrderEntity;
 import br.com.moraesit.order.service.infra.persistence.order.entity.OrderItemEntity;
+import org.aspectj.weaver.ast.Or;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +38,7 @@ public class OrderPersistenceMapper {
 
     public static Order orderEntityToOrder(OrderEntity orderEntity) {
         return Order.builder()
+                .orderId(new OrderId(orderEntity.getId()))
                 .customerId(new CustomerId(orderEntity.getCustomerId()))
                 .restaurantId(new RestaurantId(orderEntity.getRestaurantId()))
                 .deliveryAddress(orderAddressEntityToDeliveryAddress(orderEntity.getAddress()))
