@@ -21,22 +21,6 @@ spring:
     init:
       mode: always
       schema-locations: classpath:init-schema.sql,classpath:init-data.sql
-  kafka:
-    bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
-    consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-      properties:
-        specific:
-          avro:
-            reader: true
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-    properties:
-      schema:
-        registry:
-          url: http://localhost:8081
 
 payment-service:
   payment-request-topic-name: debezium.order.payment_outbox
