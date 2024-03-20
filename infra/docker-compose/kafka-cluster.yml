@@ -95,7 +95,7 @@ services:
       - kafka-broker-3
       - schema-registry
     volumes:
-      - "C:/Users/João Pedro/Desktop/debezium-connector-schema-registry-7.6.0:/kafka/connect/debezium-connector-schema-registry-7.6.0"
+      - "/Users/moraes/projects/debezium-connector-schema-registry-7.6.0:/kafka/connect/debezium-connector-schema-registry-7.6.0"
     networks:
       - ${GLOBAL_NETWORK:-kafka}
 

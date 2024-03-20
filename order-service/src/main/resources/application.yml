@@ -8,6 +8,8 @@ spring:
     open-in-view: false
     show-sql: true
     #database-platform: org.hibernate.dialect.PostgreSQL15Dialect
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
         #dialect: org.hibernate.dialect.PostgreSQL15Dialect
@@ -19,8 +21,11 @@ spring:
     platform: postgres
   sql:
     init:
-      mode: always
-      schema-location: classpath:init-schema.sql
+      mode: ALWAYS
+      schema-locations: classpath:init-schema.sql
+  threads:
+    virtual:
+      enabled: true
 
 order-service:
   payment-request-topic-name: debezium.order.payment_outbox
