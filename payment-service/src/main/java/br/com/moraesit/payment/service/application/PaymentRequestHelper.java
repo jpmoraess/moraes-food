@@ -17,8 +17,6 @@ import br.com.moraesit.payment.service.domain.entity.CreditHistory;
 import br.com.moraesit.payment.service.domain.entity.Payment;
 import br.com.moraesit.payment.service.domain.event.PaymentEvent;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -107,16 +105,16 @@ public class PaymentRequestHelper {
         paymentRepository.save(payment);
         if (failureMessages.isEmpty()) {
             creditEntryRepository.save(creditEntry);
-            creditHistoryRepository.save(creditHistoryList.get(creditHistoryList.size() - 1));
+            creditHistoryRepository.save(creditHistoryList.getLast());
         }
     }
 
-    private PaymentEvent processPayment(Payment payment, PaymentOperation paymentOperation) {
+    private void processPayment(Payment payment, PaymentOperation paymentOperation) {
         CreditEntry creditEntry = getCreditEntry(payment.getCustomerId());
         List<CreditHistory> creditHistoryList = getCreditHistory(payment.getCustomerId());
         List<String> failureMessages = new ArrayList<>();
         persistDbObjects(payment, creditEntry, creditHistoryList, failureMessages);
-        return paymentOperation.execute(payment, creditEntry, creditHistoryList, failureMessages);
+        paymentOperation.execute(payment, creditEntry, creditHistoryList, failureMessages);
     }
 
     private boolean isOutboxMessageProcessedForPayment(PaymentRequest paymentRequest, PaymentStatus paymentStatus) {
