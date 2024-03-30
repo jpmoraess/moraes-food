@@ -3,4 +3,4 @@ include 'infra'
 include 'commons'
 include 'order-service'
 include 'payment-service'
-
+include 'restaurant-service'
