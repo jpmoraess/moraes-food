@@ -1,4 +1,5 @@
-package br.com.moraesit.order.service.infra.persistence.restaurant.entity;
+package br.com.moraesit.commons.persistence.entity;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -27,23 +29,18 @@ public class RestaurantEntity {
     private Boolean restaurantActive;
     private String productName;
     private BigDecimal productPrice;
-
+    private Boolean productAvailable;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         RestaurantEntity that = (RestaurantEntity) o;
-
-        if (!restaurantId.equals(that.restaurantId)) return false;
-        return productId.equals(that.productId);
+        return restaurantId.equals(that.restaurantId) && productId.equals(that.productId);
     }
 
     @Override
     public int hashCode() {
-        int result = restaurantId.hashCode();
-        result = 31 * result + productId.hashCode();
-        return result;
+        return Objects.hash(restaurantId, productId);
     }
 }

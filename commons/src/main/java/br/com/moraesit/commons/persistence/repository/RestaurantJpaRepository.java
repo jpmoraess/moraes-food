@@ -1,7 +1,7 @@
-package br.com.moraesit.order.service.infra.persistence.restaurant.repository;
+package br.com.moraesit.commons.persistence.repository;
 
-import br.com.moraesit.order.service.infra.persistence.restaurant.entity.RestaurantEntity;
-import br.com.moraesit.order.service.infra.persistence.restaurant.entity.RestaurantEntityId;
+import br.com.moraesit.commons.persistence.entity.RestaurantEntity;
+import br.com.moraesit.commons.persistence.entity.RestaurantEntityId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

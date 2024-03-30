@@ -3,17 +3,15 @@ package br.com.moraesit.order.service.infra.persistence.restaurant.mapper;
 import br.com.moraesit.commons.domain.valueobject.Money;
 import br.com.moraesit.commons.domain.valueobject.ProductId;
 import br.com.moraesit.commons.domain.valueobject.RestaurantId;
+import br.com.moraesit.commons.persistence.entity.RestaurantEntity;
+import br.com.moraesit.commons.persistence.exception.RestaurantDataAccessException;
 import br.com.moraesit.order.service.domain.entity.Product;
 import br.com.moraesit.order.service.domain.entity.Restaurant;
-import br.com.moraesit.order.service.infra.persistence.restaurant.entity.RestaurantEntity;
-import br.com.moraesit.order.service.infra.persistence.restaurant.exception.RestaurantDataAccessException;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Component
 public class RestaurantPersistenceMapper {
 
     public static List<UUID> restaurantToRestaurantProducts(Restaurant restaurant) {

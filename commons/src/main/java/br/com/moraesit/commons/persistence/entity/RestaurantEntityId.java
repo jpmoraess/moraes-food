@@ -1,4 +1,4 @@
-package br.com.moraesit.order.service.infra.persistence.restaurant.entity;
+package br.com.moraesit.commons.persistence.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
