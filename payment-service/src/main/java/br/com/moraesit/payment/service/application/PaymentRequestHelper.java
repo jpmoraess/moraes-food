@@ -105,7 +105,7 @@ public class PaymentRequestHelper {
         paymentRepository.save(payment);
         if (failureMessages.isEmpty()) {
             creditEntryRepository.save(creditEntry);
-            creditHistoryRepository.save(creditHistoryList.getLast());
+            creditHistoryRepository.save(creditHistoryList.get(creditHistoryList.size() - 1));
         }
     }
 
