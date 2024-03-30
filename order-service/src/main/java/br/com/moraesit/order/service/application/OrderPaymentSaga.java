@@ -51,6 +51,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
     }
 
     @Override
+    @Transactional
     public void process(PaymentResponse paymentResponse) {
         Optional<OrderPaymentOutboxMessage> orderPaymentOutboxMessageResponse = paymentOutboxHelper
                 .getPaymentOutboxMessageBySagaIdAndSagaStatus(UUID.fromString(paymentResponse.getSagaId()), SagaStatus.STARTED);
