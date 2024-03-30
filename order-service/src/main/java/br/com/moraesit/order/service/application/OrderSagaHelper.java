@@ -1,11 +1,39 @@
 package br.com.moraesit.order.service.application;
 
+import br.com.moraesit.commons.domain.valueobject.OrderId;
 import br.com.moraesit.commons.domain.valueobject.OrderStatus;
 import br.com.moraesit.commons.saga.SagaStatus;
+import br.com.moraesit.order.service.application.ports.output.repository.OrderRepository;
+import br.com.moraesit.order.service.domain.entity.Order;
+import br.com.moraesit.order.service.domain.exception.OrderNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
+@Slf4j
 @Component
 public class OrderSagaHelper {
+
+    private final OrderRepository orderRepository;
+
+    public OrderSagaHelper(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    Order findOrder(String orderId) {
+        Optional<Order> orderResponse = orderRepository.findById(new OrderId(UUID.fromString(orderId)));
+        if (orderResponse.isEmpty()) {
+            log.error("Order with id: {} could not be found!", orderId);
+            throw new OrderNotFoundException("Order with id " + orderId + " could not be found!");
+        }
+        return orderResponse.get();
+    }
+
+    void saveOrder(Order order) {
+        orderRepository.save(order);
+    }
 
     SagaStatus orderStatusToSagaStatus(OrderStatus orderStatus) {
         switch (orderStatus) {

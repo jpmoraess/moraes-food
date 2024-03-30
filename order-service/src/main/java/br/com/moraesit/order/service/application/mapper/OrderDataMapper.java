@@ -13,6 +13,7 @@ import br.com.moraesit.order.service.domain.entity.Order;
 import br.com.moraesit.order.service.domain.entity.OrderItem;
 import br.com.moraesit.order.service.domain.entity.Product;
 import br.com.moraesit.order.service.domain.entity.Restaurant;
+import br.com.moraesit.order.service.domain.event.OrderCancelledEvent;
 import br.com.moraesit.order.service.domain.event.OrderCreatedEvent;
 import br.com.moraesit.order.service.domain.event.OrderPaidEvent;
 import br.com.moraesit.order.service.domain.valueobject.StreetAddress;
@@ -75,6 +76,16 @@ public class OrderDataMapper {
                         .collect(Collectors.toList()))
                 .price(orderPaidEvent.getOrder().getPrice().getAmount())
                 .createdAt(orderPaidEvent.getCreatedAt())
+                .build();
+    }
+
+    public static OrderPaymentEventPayload orderCancelledEventToOrderPaymentEventPayload(OrderCancelledEvent orderCancelledEvent) {
+        return OrderPaymentEventPayload.builder()
+                .customerId(orderCancelledEvent.getOrder().getCustomerId().getValue().toString())
+                .orderId(orderCancelledEvent.getOrder().getId().getValue().toString())
+                .price(orderCancelledEvent.getOrder().getPrice().getAmount())
+                .createdAt(orderCancelledEvent.getCreatedAt())
+                .paymentOrderStatus(PaymentOrderStatus.CANCELLED.name())
                 .build();
     }
 
