@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.Executors;
 
-@Configuration
-public class VirtualThreadConfig {
-
-    @Bean
-    public TomcatProtocolHandlerCustomizer<?> protocolHandlerVirtualThreadExecutorCustomizer() {
-        return protocolHandler -> {
-            protocolHandler.setExecutor(Executors.newVirtualThreadPerTaskExecutor());
-        };
-    }
-}
+//@Configuration
+//public class VirtualThreadConfig {
+//
+//    @Bean
+//    public TomcatProtocolHandlerCustomizer<?> protocolHandlerVirtualThreadExecutorCustomizer() {
+//        return protocolHandler -> {
+//            protocolHandler.setExecutor(Executors.newVirtualThreadPerTaskExecutor());
+//        };
+//    }
+//}

@@ -53,7 +53,7 @@ public class RestaurantApprovalRequestHelper {
         orderApprovalRepository.save(restaurant.getOrderApproval());
         orderOutboxHelper.saveOrderOutboxMessage(
                 RestaurantDataMapper.orderApprovalEventToOrderEventPayload(orderApprovalEvent),
-                orderApprovalEvent.getOrderApproval().getOrderApprovalStatus(),
+                orderApprovalEvent.getOrderApproval().getApprovalStatus(),
                 OutboxStatus.STARTED,
                 UUID.fromString(restaurantApprovalRequest.getSagaId()));
     }
