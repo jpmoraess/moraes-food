@@ -7,12 +7,12 @@ spring:
   jpa:
     open-in-view: false
     show-sql: true
-    #database-platform: org.hibernate.dialect.PostgreSQL15Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        #dialect: org.hibernate.dialect.PostgreSQL15Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://localhost:5433/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
